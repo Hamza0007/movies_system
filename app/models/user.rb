@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_one :attachment, as: :attachable
+
+  accepts_nested_attributes_for :attachment
 end
