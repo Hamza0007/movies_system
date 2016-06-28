@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true, maxlength: 150, size: 20 %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :trailer %><br>
-    <%= f.text_field :trailer %>
+    <%= f.text_field :trailer, required: true %>
   </div>
   <div class="field">
     <%= f.label :featured %><br>
