@@ -15,5 +15,11 @@
   <%= raw @movie.trailer %>
 </p>
 
+<p>
+<% @movie.attachments.each do |attachment| %>
+ <%= image_tag attachment.image.url(:medium) %>
+<% end %>
+</p>
+
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
