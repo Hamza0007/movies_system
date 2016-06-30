@@ -25,6 +25,10 @@
   </div>
 
   <div>
+    <%= f.select :actor_ids, options_for_select(@all_actors, @selected), {}, { multiple: true } %>
+  </div>
+
+  <div>
     <%= f.fields_for :attachments do |attachment| %>
       <%= attachment.file_field :image %>
       <%= attachment.link_to_remove "Remove item" %>
