@@ -1,0 +1,42 @@
+#centered {
+  margin-top: 150px;
+}
+
+.alignment {
+  margin-top: 150px;
+}
+
+.buttonstyle {
+  width: 650px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.text_color {
+  color: white;
+}
+
+.text-padding {
+  margin-right: 20px;
+}
+
+.size {
+  width: 100px;
+  height: 40px;
+  margin-left: 100px;
+}
+
+#border1 {
+  border:1px light grey;
+}
+
+.size-textbox {
+  width: 300px;
+}
+
+.field-content {
+  margin-left: 150px;
+}
+.inline-style {
+  margin-right: 220px;
+}
