@@ -1,3 +1,7 @@
+body {
+  background-color: #f0f0f0;
+}
+
 #centered {
   margin-top: 150px;
 }
@@ -16,14 +20,33 @@
   color: white;
 }
 
-.text-padding {
+.text-alignment {
   margin-right: 20px;
 }
 
-.size {
+
+.small-btn {
   width: 100px;
   height: 40px;
   margin-left: 100px;
+}
+
+.medium-btn {
+  width: 230px;
+  height: 40px;
+  margin-left: 30px;
+}
+
+.large-btn {
+  width: 280px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.average-btn {
+  width: 150px;
+  height: 40px;
+  margin-right: 100px;
 }
 
 #border1 {
@@ -35,8 +58,31 @@
 }
 
 .field-content {
-  margin-left: 150px;
+  margin-left: 350px;
 }
+
+.movie-field-content {
+  margin-left: 150px;
+  margin-top: 30px;
+}
+
 .inline-style {
-  margin-right: 220px;
+  margin-right: 400px;
+}
+
+.confirm-content-alignment {
+  margin-top: 30px;
+}
+
+.panel-alignment {
+  margin-right: 20px;
+  width: 400px;
+}
+
+.panel-body-alignment {
+  margin-left: 20px;
+}
+
+.trailer-description-alignment {
+  margin-left:160px;
 }
