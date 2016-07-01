@@ -43,8 +43,11 @@
           <div class='clearfix'></div>
           <%= raw @movie.description %>
         </div>
-        <%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-primary" %> |
-        <%= link_to 'Back', movies_path, class: "btn btn-danger" %>
+        <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
+        <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %> |
+        <%= link_to 'Back', movies_path, class: 'btn btn-primary' %>
+        <div class='clearfix'></div>
+        <div class='clearfix'></div>
       </div>
     </div>
   </div>
