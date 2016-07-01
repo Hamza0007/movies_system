@@ -86,3 +86,16 @@ body {
 .trailer-description-alignment {
   margin-left:160px;
 }
+
+#cast-alignment {
+  margin-bottom: 20px;
+}
+
+.newline {
+  margin-bottom: 20px;
+}
+
+.heading-font {
+
+  font-size: 20px;
+}

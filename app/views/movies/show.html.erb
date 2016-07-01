@@ -1,25 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class='container alignment'>
+  <h1 class='text-center'>
+    <p>
+      <%= title_titelize(@movie.title) %>
+    </p>
+  </h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= title_titelize(@movie.title) %>
-</p>
+  <div class='container-fluid'>
+    <div class='row movie-field-content'>
+      <div class='col-md-12'>
+        <div>
+          <p id="notice"><%= notice %></p>
+        </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= raw @movie.description %>
-</p>
+        <div id='cast-alignment'>
+          <span class='heading-font'>
+            <strong>Cast:</strong>
+          </span>
+          <span class='text-capitalize font-weight-normal'><%= @actors.collect(&:name).join(',') %></span>
+        </div>
 
-<p>
-  <strong>Trailer:</strong>
-  <%= raw @movie.trailer %>
-</p>
+        <div class='newline'>
+          <%= image_tag @movie.attachments.first.image.url(:large) %>
+          <div class='clearfix'></div>
+          <% @movie.attachments.each do |attachment| %>
+            <%= image_tag attachment.image.url(:thumb) %>
+          <% end %>
+        </div>
 
-<p>
-<% @movie.attachments.each do |attachment| %>
- <%= image_tag attachment.image.url(:medium) %>
-<% end %>
-</p>
+        <div class='newline'>
+          <span class='heading-font'>
+            <strong>Trailer:</strong>
+          </span>
+          <div class='clearfix'></div>
+          <%= raw @movie.trailer %>
+        </div>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+        <div>
+          <div class='clearfix'></div>
+            <span class='heading-font'>
+              <strong>Description:</strong>
+            </span>
+          <div class='clearfix'></div>
+          <%= raw @movie.description %>
+        </div>
+        <%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-primary" %> |
+        <%= link_to 'Back', movies_path, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
