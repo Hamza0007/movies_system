@@ -118,7 +118,7 @@ body {
   margin-top: 10px;
 }
 
-#index-movie-alignment {
+.index-movie-alignment {
   margin-right: 90px;
 }
 
@@ -137,4 +137,8 @@ body {
 .margin-down {
   margin-bottom: 40px;
   margin-top: 10px;
+}
+
+.home-heading {
+  margin-left: 362px;
 }

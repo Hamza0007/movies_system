@@ -1,1 +1,49 @@
-<p>Welcome to the world of movies </p>
+<div class='home-heading'>
+  <h1>Latest:</h1>
+</div>
+<div class='clearfix'></div>
+<div class='clearfix'></div>
+<div class='container'>
+  <div class='container-fluid'>
+    <% @latest.in_groups_of(3, false).each do |movie_group| %>
+      <div class='row'>
+        <% movie_group.each do |movie| %>
+          <div class='col-md-3 index-movie-alignment'>
+            <%= link_to(image_tag(movie.attachments.first.image.url(:medium)), movie) %>
+            <div id='movie-title-alignment'>
+              <strong><%= title_titelize(movie.title) %></strong>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class='margin-down pull-center'>
+        <%= link_to 'View All', movies_path(filter: 'Latest'), class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <h1 class='home-heading'>Featured:</h1>
+</div>
+<div class='clearfix'></div>
+<div class='clearfix'></div>
+<div class='container'>
+  <div class='container-fluid'>
+    <% @featured.in_groups_of(3, false).each do |movie_group| %>
+      <div class='row'>
+        <% movie_group.each do |movie| %>
+          <div class='col-md-3 index-movie-alignment'>
+            <%= link_to(image_tag(movie.attachments.first.image.url(:medium)), movie) %>
+            <div id='movie-title-alignment'>
+              <strong><%= title_titelize(movie.title) %></strong>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class='margin-down pull-center'>
+        <%= link_to 'View All', movies_path(filter: 'Featured'), class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

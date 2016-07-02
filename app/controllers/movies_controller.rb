@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = params[:filter] == "Latest" ? Movie.latest : Movie.feature
   end
 
   # GET /movies/1
