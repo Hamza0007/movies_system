@@ -9,17 +9,35 @@
     <div class='row movie-field-content'>
       <div class='col-md-12'>
         <div>
-          <p id="notice"><%= notice %></p>
-        </div>
-
-        <div id='cast-alignment'>
           <span class='heading-font'>
             <strong>Cast:</strong>
           </span>
           <span class='text-capitalize font-weight-normal'><%= @actors.collect(&:name).join(',') %></span>
         </div>
 
-        <div class='newline'>
+        <div>
+          <span class='heading-font'>
+            <strong>Genre:</strong>
+          </span>
+          <%= @movie.genre %>
+        </div>
+
+        <div>
+          <span class='heading-font'>
+            <strong>Duration:</strong>
+          </span>
+          <%= @movie.duration %>
+          <span> mins</span>
+        </div>
+
+        <div>
+          <span class='heading-font'>
+            <strong>Release Date:</strong>
+          </span>
+          <%= @movie.release_date %>
+        </div>
+
+        <div class='newline '>
           <%= image_tag @movie.attachments.first.image.url(:large) %>
           <div class='clearfix'></div>
           <% @movie.attachments.each do |attachment| %>
@@ -27,7 +45,7 @@
           <% end %>
         </div>
 
-        <div class='newline'>
+        <div class='newline poster-trailer-alignment'>
           <span class='heading-font'>
             <strong>Trailer:</strong>
           </span>
@@ -35,7 +53,7 @@
           <%= raw @movie.trailer %>
         </div>
 
-        <div>
+        <div id='description-alignment'>
           <div class='clearfix'></div>
             <span class='heading-font'>
               <strong>Description:</strong>
@@ -46,8 +64,8 @@
         <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
         <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %> |
         <%= link_to 'Back', movies_path, class: 'btn btn-primary' %>
-        <div class='clearfix'></div>
-        <div class='clearfix'></div>
+        <div class='clearfix margin-up-down'></div>
+        <div class='clearfix margin-up-down'></div>
       </div>
     </div>
   </div>

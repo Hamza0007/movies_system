@@ -96,8 +96,8 @@ body {
   margin-left:160px;
 }
 
-#cast-alignment {
-  margin-bottom: 20px;
+.poster-trailer-alignment {
+  margin-top: 20px;
 }
 
 .newline {
@@ -119,9 +119,22 @@ body {
 }
 
 #index-movie-alignment {
-  margin-right: 100px;
+  margin-right: 90px;
 }
 
 #movie-title-alignment {
   margin-left: 100px;
+}
+
+.outset {
+  border-style: solid;
+}
+
+#description-alignment {
+  width: 560px;
+}
+
+.margin-down {
+  margin-bottom: 40px;
+  margin-top: 10px;
 }

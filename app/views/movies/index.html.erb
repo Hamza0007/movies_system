@@ -1,8 +1,6 @@
-<p id='notice'><%= notice %></p>
 <h1 class='text-center'>Movies</h1>
-<div class='container alignment'>
+<div class='container'>
   <div class='container-fluid'>
-
     <% @movies.in_groups_of(3, false).each do |movie_group| %>
       <div class='row'>
         <% movie_group.each do |movie| %>
@@ -16,7 +14,8 @@
       </div>
     <% end %>
 
-    <%= link_to 'New Movie', new_movie_path, class: 'btn btn-info' %>
-
+    <div class='margin-down'>
+      <%= link_to 'New Movie', new_movie_path, class: 'btn btn-info' %>
+    </div>
   </div>
 </div>

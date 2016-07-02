@@ -4,12 +4,12 @@
       <div class='col-md-11-offset-1 inline-style'>
         <div class='panel panel-default panel-alignment-edit'>
           <div class='panel-heading'>
-            <strong>Edit Movie</strong>
+            <strong><%= button_title('Movie') %></strong>
           </div>
           <div class='panel-body panel-body-alignment'>
             <%= nested_form_for(@movie) do |f| %>
               <% if @movie.errors.any? %>
-                <div id='error_explanation'>
+                <div id='error_explanation'><p id='notice' class='alert alert-danger'><%= notice %></p>
                   <h2><%= pluralize(@movie.errors.count, 'error') %> prohibited this movie from being saved:</h2>
 
                   <ul>
@@ -36,6 +36,24 @@
                 <%= f.label :actors %>
                 <div class='clearfix'></div>
                 <%= f.select :actor_ids, options_for_select(@all_actors, @selected), {}, { multiple: true } %>
+              </div>
+
+              <div class='field form-group'>
+                <%= f.label :genre %>
+                <div class='clearfix'></div>
+                <%= f.select :genre, options_for_select(Movie::GENRE), class: 'form-control' %>
+              </div>
+
+              <div class='field form-group'>
+                <%= f.label :release_date %>
+                <div class='clearfix'></div>
+                <%= f.date_field :release_date, required: true, class: 'form-control size-textbox' %>
+              </div>
+
+              <div class='field form-group'>
+                <%= f.label :duration %>
+                <div class='clearfix'></div>
+                <%= f.text_field :duration, required: true, class: 'form-control size-textbox' %>
               </div>
 
               <div class='field form-group'>

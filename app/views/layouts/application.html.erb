@@ -9,6 +9,11 @@
 <body>
 
 <%= render 'shared/header' %>
+<% unless notice.blank? %>
+  <div>
+    <p id='notice' class='alert alert-success'><%= notice %></p>
+  </div>
+<% end %>
 <%= yield %>
 <%= render 'shared/footer' %>
 
