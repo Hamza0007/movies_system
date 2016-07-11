@@ -1,8 +1,6 @@
 <div class='container alignment'>
   <h1 class='text-center'>
-    <p>
-      <%= title_titelize(@movie.title) %>
-    </p>
+    <%= title_titelize(@movie.title) %>
   </h1>
 
   <div class='container-fluid'>
@@ -61,6 +59,21 @@
           <div class='clearfix'></div>
           <%= raw @movie.description %>
         </div>
+
+        <div id='movies-review'>
+          <%= render 'reviews/reviews' %>
+          <h2>Add a review:</h2>
+          <%= form_for([@movie, @movie.reviews.build], remote: true) do |f| %>
+            <div class="field">
+              <%= f.label :comment %><br>
+              <%= f.text_area :comment %>
+            </div>
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
+        </div>
+
         <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
         <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %> |
         <%= link_to 'Back', movies_path, class: 'btn btn-primary' %>
