@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+  paginates_per 5
+
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :trailer, presence: true
   validates :genre, presence: true
