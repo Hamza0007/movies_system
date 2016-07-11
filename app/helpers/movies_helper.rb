@@ -6,11 +6,8 @@ module MoviesHelper
   end
 
   def button_title(val)
-    if action_name == 'new'
-      "Create #{val}"
-    else
-      "Update #{val}"
-    end
+    prefix = action_name == 'new' ? 'Create' : 'Update'
+    [prefix, val].join(' ')
   end
 
 end
