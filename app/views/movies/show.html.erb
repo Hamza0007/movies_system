@@ -60,19 +60,26 @@
           <%= raw @movie.description %>
         </div>
 
-        <div id='movies-review'>
-          <%= render 'reviews/reviews' %>
-          <h2>Add a review:</h2>
-          <%= form_for([@movie, @movie.reviews.build], remote: true) do |f| %>
-            <div class="field">
-              <%= f.label :comment %><br>
-              <%= f.text_area :comment %>
-            </div>
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-          <% end %>
-        </div>
+          <div id='movies-review'>
+            <%= render 'reviews/reviews' %>
+
+            <% if user_signed_in? %>
+              <h2>Add a review:</h2>
+
+              <%= form_for([@movie, @movie.reviews.build], remote: true) do |f| %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+
+                <div class="field">
+                  <%= f.label :comment %><br>
+                  <%= f.text_area :comment %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
 
         <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
         <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %> |

@@ -1,21 +1,14 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_movie
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def edit
   end
 
   def create
-    @review = @movie.reviews.create(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to movie_path(@movie), notice: 'Review was successfully created.' }
-      else
-        format.html { render :new }
-      end
-      format.js
-    end
+    @review = @movie.reviews.new(review_params)
+    @review.save
   end
 
   def update
@@ -31,9 +24,6 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    respond_to do |format|
-      format.html { redirect_to movie_path(@movie), notice: 'Review was successfully destroyed.' }
-    end
   end
 
   private

@@ -1,5 +1,9 @@
-<div id='review-<%= review.id %>'>
+<div id="review-<%= review.id %>">
   <%= review.comment %>
-  <%= link_to 'Edit', edit_movie_review_path(@movie, review) %>
-  <%= link_to 'Destroy', [@movie, review], method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% if user_signed_in? %>
+    <% if check_user(review) %>
+      <%= link_to 'Edit', edit_movie_review_path(@movie, review) %>
+      <%= link_to 'Destroy', [@movie, review],remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  <% end %>
 </div>
