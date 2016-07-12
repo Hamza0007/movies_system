@@ -11,13 +11,13 @@
               <div class='field form-group'>
                 <%= f.label :email %>
                 <div class='clearfix'></div>
-                <%= f.email_field :email, autofocus: true, class: 'form-control size-textbox', placeholder: 'Enter email' %>
+                <%= f.email_field :email, required: true, autofocus: true, class: 'form-control size-textbox', placeholder: 'Enter email' %>
               </div>
 
               <div class='field form-group'>
                 <%= f.label :password %>
                 <div class='clearfix'></div>
-                <%= f.password_field :password, autocomplete: 'off', class: 'form-control size-textbox', placeholder: 'Enter password' %>
+                <%= f.password_field :password, required: true, autocomplete: 'off', class: 'form-control size-textbox', placeholder: 'Enter password' %>
               </div>
 
               <% if devise_mapping.rememberable? -%>
