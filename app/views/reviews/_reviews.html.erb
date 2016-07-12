@@ -1,5 +1,5 @@
 <div id='movie-review'>
-  <strong>Review:</strong>
+  <strong>Reviews:</strong>
   <% @movie.reviews.each do |review| %>
     <%= render 'reviews/show', review: review %>
   <% end %>

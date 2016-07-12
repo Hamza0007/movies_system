@@ -25,7 +25,7 @@
             <strong>Duration:</strong>
           </span>
           <%= @movie.duration %>
-          <span> mins</span>
+          <span> hours </span>
         </div>
 
         <div>
@@ -64,26 +64,13 @@
             <%= render 'reviews/reviews' %>
 
             <% if user_signed_in? %>
-              <h2>Add a review:</h2>
-
-              <%= form_for([@movie, @movie.reviews.build], remote: true) do |f| %>
-                <%= f.hidden_field :user_id, value: current_user.id %>
-
-                <div class="field">
-                  <%= f.label :comment %><br>
-                  <%= f.text_area :comment %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit %>
-                </div>
-              <% end %>
+              <%= render partial: 'reviews/form' , locals: {form_type: true} %>
             <% end %>
           </div>
 
         <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
-        <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %> |
-        <%= link_to 'Back', movies_path, class: 'btn btn-primary' %>
+        <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %> |
+        <%= link_to 'Back', movies_path, class: 'btn btn-primary text-color' %>
         <div class='clearfix margin-up-down'></div>
         <div class='clearfix margin-up-down'></div>
       </div>
