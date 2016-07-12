@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ratings, only: [:edit, :create, :update, :destroy]
   resources :movies do
     resources :reviews
   end
