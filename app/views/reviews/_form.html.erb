@@ -11,11 +11,11 @@
     </div>
   <% end %>
 
-  <div class='field'>
-    <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+  <div class='field form-group'>
+    <%= f.label :review %><br>
+    <%= f.text_area :comment, required: true,class: 'form-control size-textbox' %>
   </div>
-  <div class='actions'>
-    <%= f.submit %>
+  <div class='actions form-group'>
+    <%= f.submit button_name('Review'), class: 'btn btn-success form' %>
   </div>
 <% end %>
