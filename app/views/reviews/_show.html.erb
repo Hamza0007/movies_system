@@ -1,17 +1,18 @@
 <div id="review-<%= review.id %>" class='review-alignment'>
+  <strong>Username:</strong>
+  <%= review.user_email %>
+  <div class='clearfix'></div>
+  <strong>Review:</strong>
 
-  <% if review.user %>
-    <strong>Username:</strong>
-    <%= review.show_email %>
-    <div class='clearfix'></div>
-    <strong>Review:</strong>
-  <% end %>
   <%= review.comment %>
+
   <% if user_signed_in? %>
-    <% if check_user(review) %>
+    <% if check_review_owner(review) %>
       <div class='clearfix'></div>
       <%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-xs btn-success' %>
-      <%= link_to 'Destroy', [@movie, review], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger text-color' %>
+      <%= link_to 'Destroy', [@movie, review], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+    <% else %>
+      <%= link_to 'Report', [@movie, review, ReportedReview.new], remote: true, class: 'btn btn-xs btn-primary', method: :post %>
     <% end %>
   <% end %>
 </div>

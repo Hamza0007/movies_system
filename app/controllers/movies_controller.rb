@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @actors = @movie.actors
-    @review = @movie.reviews.build
+    @review = Review.new
   end
 
   # GET /movies/new

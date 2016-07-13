@@ -6,6 +6,7 @@
   <div class='container-fluid'>
     <div class='row movie-field-content'>
       <div class='col-md-12'>
+
         <div>
           <span class='heading-font'>
             <strong>Cast:</strong>
@@ -60,13 +61,13 @@
           <%= raw @movie.description %>
         </div>
 
-          <div id='movies-review'>
-            <%= render 'reviews/reviews' %>
+        <div id='movies-review'>
+          <%= render 'reviews/reviews' %>
 
-            <% if user_signed_in? %>
-              <%= render partial: 'reviews/form' , locals: {form_type: true} %>
-            <% end %>
-          </div>
+          <% if user_signed_in? %>
+            <%= render partial: 'reviews/form' , locals: {form_type: true} %>
+          <% end %>
+        </div>
 
         <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
         <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %> |

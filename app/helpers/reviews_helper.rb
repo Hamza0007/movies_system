@@ -1,5 +1,5 @@
 module ReviewsHelper
-  def check_user(review)
-    review.user_id == current_user.id
+  def check_review_owner(review)
+    review.user == current_user
   end
 end

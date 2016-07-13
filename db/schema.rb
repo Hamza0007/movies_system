@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712092045) do
+ActiveRecord::Schema.define(version: 20160713041302) do
 
   create_table "actors", force: :cascade do |t|
     t.string   "name",       limit: 20,    null: false
@@ -68,12 +68,23 @@ ActiveRecord::Schema.define(version: 20160712092045) do
   add_index "ratings", ["movie_id"], name: "index_ratings_on_movie_id", using: :btree
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reported_reviews", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.integer  "movie_id",   limit: 4
-    t.text     "comment",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "review_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "reported_reviews", ["review_id"], name: "index_reported_reviews_on_review_id", using: :btree
+  add_index "reported_reviews", ["user_id"], name: "index_reported_reviews_on_user_id", using: :btree
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "movie_id",     limit: 4
+    t.text     "comment",      limit: 65535
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "report_count", limit: 4,     default: 0
   end
 
   add_index "reviews", ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
@@ -106,6 +117,8 @@ ActiveRecord::Schema.define(version: 20160712092045) do
   add_foreign_key "casts", "movies"
   add_foreign_key "ratings", "movies"
   add_foreign_key "ratings", "users"
+  add_foreign_key "reported_reviews", "reviews"
+  add_foreign_key "reported_reviews", "users"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
 end
