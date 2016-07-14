@@ -15,6 +15,13 @@ class MoviesController < ApplicationController
   def show
     @actors = @movie.actors
     @review = Review.new
+    @ratings = @movie.ratings
+    @rating = @movie.get_movie_ratings(current_user) if user_signed_in?
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @movie }
+    end
   end
 
   # GET /movies/new
@@ -68,7 +75,7 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_movie
       @movie = Movie.find(params[:id])
     end
@@ -77,7 +84,6 @@ class MoviesController < ApplicationController
       @all_actors = Actor.all.pluck(:name, :id)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :description, :trailer, :featured, :genre, :release_date, :duration, :approved, actor_ids: [],
        attachments_attributes: [:id, :image, :_destroy])

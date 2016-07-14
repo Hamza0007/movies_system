@@ -9,6 +9,7 @@ class Movie < ActiveRecord::Base
   has_many :casts, dependent: :destroy
   has_many :actors, through: :casts
   has_many :reviews, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
@@ -16,5 +17,13 @@ class Movie < ActiveRecord::Base
 
   scope :feature, -> { where(featured: true) }
   scope :latest, -> { order('release_date DESC') }
+
+  def get_average_rating
+    self.ratings.present? ? self.ratings.average(:score) : 0
+  end
+
+  def get_movie_ratings(user)
+    user.ratings.for_movie(self).first || self.ratings.new
+  end
 
 end

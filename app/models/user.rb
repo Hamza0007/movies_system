@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :attachment, as: :attachable
   has_many :reported_reviews
   has_many :reviews
+  has_many :ratings
 
   accepts_nested_attributes_for :attachment
 end
