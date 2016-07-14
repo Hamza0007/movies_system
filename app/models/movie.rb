@@ -26,4 +26,11 @@ class Movie < ActiveRecord::Base
     user.ratings.for_movie(self).first || self.ratings.new
   end
 
+  def movie_cast
+    self.actors.pluck(:name).join(', ')
+  end
+
+  def first_poster
+    attachments.first
+ end
 end
