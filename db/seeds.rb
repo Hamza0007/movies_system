@@ -17,3 +17,5 @@
   Actor.create!(name: 'Angelina Jolie', biography: 'Angelina Jolie Pitt is an American actress, filmmaker, and humanitarian. She has received an Academy Award, two Screen Actors Guild Awards, and three Golden Globe Awards, and has been cited as Hollywood highest-paid actress', gender: 'Female')
 
   Actor.create!(name: 'Leonardo DiCaprio', biography: 'Leonardo Wilhelm DiCaprio is an American actor and film producer. He is an award-winning actor and a three-time Academy Award® nominee. ', gender: 'Male')
+
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
