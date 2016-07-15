@@ -2,16 +2,18 @@
   <nav class='navbar navbar-inverse'>
      <div class='container-fluid'>
        <div class='navbar-header'>
-         <a class='navbar-brand' href='#'>Movie Management System</a>
+         <%= link_to 'Movie Management System', root_path, class: 'navbar-brand' %>
        </div>
-       <ul class='nav navbar-nav'>
+       <ul class='nav navbar-nav pull-right'>
          <% if user_signed_in? %>
            <li class='active'><a href='#'>Logged in as <strong><%= current_user.email %></strong>.</a></li>
-           <li><%= link_to 'Edit profile', edit_user_registration_path %></a></li>
-           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete  %></a></li>
+           <li><%= link_to 'New Movie', new_movie_path %></li>
+           <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete  %></li>
          <% else %>
-           <li><%= link_to 'Sign up', new_user_registration_path  %></a></li>
-           <li><%= link_to 'Login', new_user_session_path  %></a></li>
+           <li><%= link_to 'Sign up', new_user_registration_path %></li>
+           <li><%= link_to 'Login', new_user_session_path %></li>
+           <li><%= link_to 'Go to Admin Panel', new_admin_user_session_path %></li>
          <% end %>
        </ul>
      </div>
