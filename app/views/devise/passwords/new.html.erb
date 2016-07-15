@@ -1,27 +1,25 @@
-<div class='container alignment'>
-  <div class='container-fluid'>
-    <div class='row field-content'>
-      <div class='col-md-11-offset-1 inline-style'>
-        <div class='panel panel-default panel-alignment'>
-          <div class='panel-heading'>
-            <strong>Forgot Password</strong>
-          </div>
-          <div class='panel-body panel-body-alignment'>
-            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-              <%= devise_error_messages! %>
+<div align='center'>
+  <div class='row'>
+    <div class='col-md-8-offset-4'>
+      <div class='panel panel-default panel-alignment'>
+        <div class='panel-heading'>
+          <h1 align='center'>Forgot Password</h1>
+        </div>
+        <div class='panel-body panel-body-alignment'>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
 
-              <div class='field form-group'>
-                <%= f.label :email %>
-                <div class='clearfix'>
-                </div>
-                <%= f.email_field :email,required: true, autofocus: true, placeholder: 'Enter email', class: 'form-control size-textbox' %>
+            <div class='field form-group'>
+              <%= f.label :email %>
+              <div class='clearfix'>
               </div>
+              <%= f.email_field :email,required: true, autofocus: true, placeholder: 'Enter email', class: 'form-control size-textbox' %>
+            </div>
 
-              <div class='actions'>
-                <%= f.submit 'Send me reset password instructions', class: 'form-control large-btn btn-info icon-hand-right' %>
-              </div>
-            <% end %>
-          </div>
+            <div class='actions'>
+              <%= f.submit 'Send me reset password instructions', class: 'form-control large-btn btn-info icon-hand-right' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

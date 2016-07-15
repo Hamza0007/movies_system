@@ -1,25 +1,23 @@
-<div class='container alignment'>
-  <div class='container-fluid'>
-    <div class='row field-content'>
-      <div class='col-md-11-offset-1 inline-style'>
-        <div class='panel panel-default panel-alignment'>
-          <div class='panel-heading'>
-            <strong>Forgot Password</strong>
-          </div>
-          <div class='panel-body panel-body-alignment'>
-            <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-              <%= devise_error_messages! %>
+<div align='center'>
+  <div class='row'>
+    <div class='col-md-8-offset-4'>
+      <div class='panel panel-default panel-alignment'>
+        <div class='panel-heading'>
+          <h1 align='center'>Forgot Password</h1>
+        </div>
+        <div class='panel-body panel-body-alignment'>
+          <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
 
-              <div class='field form-group'>
-                <%= f.label :email %><div class='clearfix'></div>
-                <%= f.email_field :email,required: true, autofocus: true, placeholder: 'Enter email', class: 'form-control size-textbox', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-              </div>
+            <div class='field form-group'>
+              <%= f.label :email %><div class='clearfix'></div>
+              <%= f.email_field :email,required: true, autofocus: true, placeholder: 'Enter email', class: 'form-control size-textbox', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+            </div>
 
-              <div class='actions'>
-                <%= f.submit 'Resend confirmation instructions', class: 'form-control medium-btn btn-info icon-hand-right' %>
-              </div>
-            <% end %>
-          </div>
+            <div class='actions'>
+              <%= f.submit 'Resend confirmation instructions', class: 'form-control medium-btn btn-info icon-hand-right' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

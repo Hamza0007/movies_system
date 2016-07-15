@@ -1,37 +1,35 @@
-<div class='container alignment'>
-  <div class='container-fluid'>
-    <div class='row field-content'>
-      <div class='col-md-11-offset-1 inline-style'>
-        <div class='panel panel-default panel-alignment'>
-          <div class='panel-heading'>
-            <strong>Login</strong>
-          </div>
-          <div class='panel-body panel-body-alignment'>
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div align='center'>
+  <div class='row'>
+    <div class='col-md-8-offset-4'>
+      <div class='panel panel-default panel-alignment'>
+        <div class='panel-heading'>
+          <h1 align='center'>Login</h1>
+        </div>
+        <div class='panel-body' align='left'>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class='field form-group'>
+              <%= f.label :email %>
+              <div class='clearfix'></div>
+              <%= f.email_field :email, required: true, autofocus: true, class: 'form-control size-textbox', placeholder: 'Enter email' %>
+            </div>
+
+            <div class='field form-group'>
+              <%= f.label :password %>
+              <div class='clearfix'></div>
+              <%= f.password_field :password, required: true, autocomplete: 'off', class: 'form-control size-textbox', placeholder: 'Enter password' %>
+            </div>
+
+            <% if devise_mapping.rememberable? -%>
               <div class='field form-group'>
-                <%= f.label :email %>
-                <div class='clearfix'></div>
-                <%= f.email_field :email, required: true, autofocus: true, class: 'form-control size-textbox', placeholder: 'Enter email' %>
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
               </div>
+            <% end -%>
 
-              <div class='field form-group'>
-                <%= f.label :password %>
-                <div class='clearfix'></div>
-                <%= f.password_field :password, required: true, autocomplete: 'off', class: 'form-control size-textbox', placeholder: 'Enter password' %>
-              </div>
-
-              <% if devise_mapping.rememberable? -%>
-                <div class='field form-group'>
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </div>
-              <% end -%>
-
-              <div class='actions field form-group'>
-                <%= f.submit 'Log in', class: 'form-control small-btn btn-success icon-hand-right' %>
-              </div>
-            <% end %>
-          </div>
+            <div class='actions field form-group'>
+              <%= f.submit 'Log in', class: 'form-control small-btn btn-success icon-hand-right' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

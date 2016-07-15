@@ -2,6 +2,11 @@ body {
   background-color: #f0f0f0;
 }
 
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
 #centered {
   margin-top: 150px;
 }
@@ -79,7 +84,6 @@ body {
 }
 
 .panel-alignment {
-  margin-right: 20px;
   width: 400px;
 }
 
@@ -88,8 +92,8 @@ body {
   width: 600px;
 }
 
-.panel-body-alignment {
-  margin-left: 20px;
+.panel-body {
+  padding: 50px;
 }
 
 .trailer-description-alignment {
@@ -137,10 +141,6 @@ body {
 .margin-down {
   margin-bottom: 40px;
   margin-top: 10px;
-}
-
-.home-heading {
-  margin-left: 362px;
 }
 
 .review-alignment {
