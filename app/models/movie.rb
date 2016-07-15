@@ -30,7 +30,7 @@ class Movie < ActiveRecord::Base
     self.actors.pluck(:name).join(', ')
   end
 
-  def first_poster
-    attachments.first
+  def first_poster(style=:medium)
+    attachments.first && attachments.first.try(:image).url(style) || "#{style.to_s}/missing.png"
  end
 end

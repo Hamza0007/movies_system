@@ -4,7 +4,7 @@
       <div class='col-md-11-offset-1 inline-style'>
         <div class='panel panel-default panel-alignment-edit'>
           <div class='panel-heading'>
-            <strong><%= button_title('Movie') %></strong>
+            <h1 class='center'><%= button_title('Movie') %></h1>
           </div>
           <div class='panel-body panel-body-alignment'>
             <%= nested_form_for(@movie) do |f| %>
@@ -27,7 +27,7 @@
               </div>
 
               <div class='field form-group'>
-                <%= f.label :trailer %>
+                <%= f.label :trailer %><span> (Add Embeded Code)</span>
                 <div class='clearfix'></div>
                 <%= f.text_field :trailer, required: true, class: 'form-control size-textbox' %>
               </div>
@@ -45,21 +45,25 @@
               </div>
 
               <div class='field form-group'>
-                <%= f.label :release_date %>
+                <%= f.label :release_date, 'Release Date' %>
                 <div class='clearfix'></div>
                 <%= f.date_field :release_date, required: true, class: 'form-control size-textbox' %>
               </div>
 
               <div class='field form-group'>
-                <%= f.label :duration %>
+                <%= f.label :duration %><span> (in mins)</span>
                 <div class='clearfix'></div>
-                <%= f.text_field :duration, required: true, class: 'form-control size-textbox' %>
+                <%= f.text_field :duration, required: true, class: 'form-control size-textbox', id: 'numeric' %>
               </div>
 
               <div class='field form-group'>
                 <%= f.label :Posters %>
                 <div class='clearfix'></div>
                 <%= f.fields_for :attachments do |attachment| %>
+                  <% unless attachment.object.image.url(:thumb) == 'thumb/missing.png' %>
+                    <div><%= image_tag attachment.object.image.url(:thumb) %></div>
+                  <% end %>
+
                   <%= attachment.file_field :image, class:'form-control' %>
                   <%= attachment.link_to_remove 'Remove item', class: 'margin-up-down btn btn-danger' %>
                   <div class='clearfix'></div>

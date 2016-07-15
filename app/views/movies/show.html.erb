@@ -26,22 +26,20 @@
             <strong>Duration:</strong>
           </span>
           <%= @movie.duration %>
-          <span> hours </span>
+          <span> mins </span>
         </div>
 
         <div>
           <span class='heading-font'>
             <strong>Release Date:</strong>
           </span>
-          <%= @movie.release_date %>
+          <%= date_display(@movie.release_date) %>
         </div>
 
-        <div class='newline '>
-          <%= image_tag @movie.attachments.first.image.url(:large) %>
+        <div class='newline'>
+          <%= image_tag @movie.first_poster(:medium) %>
           <div class='clearfix'></div>
-          <% @movie.attachments.each do |attachment| %>
-            <%= image_tag attachment.image.url(:thumb) %>
-          <% end %>
+          <%= render partial: 'poster', collection: @movie.attachments, as: :poster %>
         </div>
 
         <div class='newline poster-trailer-alignment'>
