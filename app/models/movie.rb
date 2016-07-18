@@ -4,6 +4,7 @@ class Movie < ActiveRecord::Base
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :trailer, presence: true
   validates :genre, presence: true
+  validates :release_date, presence: true
 
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :casts, dependent: :destroy
