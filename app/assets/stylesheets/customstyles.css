@@ -1,14 +1,24 @@
 body {
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 
-.center {
+.body-margin {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+.centered {
   align: center;
 }
 
 .col-centered {
   float: none;
   margin: 0 auto;
+}
+
+.word-wrapper {
+  word-wrap: break-word;
 }
 
 #centered {
@@ -60,10 +70,6 @@ body {
 
 #border1 {
   border:1px light grey;
-}
-
-.size-textbox {
-  width: 300px;
 }
 
 .field-content {
