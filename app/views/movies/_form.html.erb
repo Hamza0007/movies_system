@@ -41,7 +41,7 @@
               <div class='field form-group'>
                 <%= f.label :genre %>
                 <div class='clearfix'></div>
-                <%= f.select :genre, options_for_select(Movie::GENRE), class: 'form-control' %>
+                <%= f.select :genre, Movie::GENRE, class: 'form-control' %>
               </div>
 
               <div class='field form-group'>
