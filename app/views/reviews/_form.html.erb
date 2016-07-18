@@ -13,7 +13,7 @@
 
   <div class='field form-group'>
     <%= f.label :review %><br>
-    <%= f.text_area :comment, required: true,class: 'form-control size-textbox' %>
+    <%= f.text_area :comment, required: true, maxlength: 2000, class: 'form-control' %>
   </div>
   <div class='actions form-group'>
     <%= f.submit button_name('Review'), class: 'btn btn-success form' %>
