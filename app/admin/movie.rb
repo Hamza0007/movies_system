@@ -14,11 +14,38 @@ ActiveAdmin.register Movie do
     column :featured
     column :approved
     column "Poster" do |movie|
-      image_tag(movie.first_poster.image.url(:thumb)) if movie.first_poster
+      image_tag(movie.first_poster(:thumb)) if movie.first_poster
     end
     column :release_date
     column :created_at
     actions
+  end
+
+  show do
+    attributes_table do
+      row :poster do
+        div do
+          movie.attachments.each do |poster|
+            div do
+              image_tag(poster.image.url(:thumb))
+            end
+          end
+        end
+      end
+      row :title
+      row :actors do |movie|
+        movie.movie_cast
+      end
+      row :trailer
+      row :genre
+      row :release_date
+      row :duration
+      row :description do |movie|
+        movie.description.html_safe
+      end
+      row :featured
+      row :approved
+    end
   end
 
   form do |f|
