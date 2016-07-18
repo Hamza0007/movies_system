@@ -1,42 +1,18 @@
-<div>
-  <h1>Latest:</h1>
-</div>
-<div>
-  <% @latest.in_groups_of(3, false).each do |movie_group| %>
-    <div class='row'>
-      <% movie_group.each do |movie| %>
-        <div class='col-md-4'>
-          <%= link_to image_tag(movie.first_poster(:medium)), movie %>
-          <div align='center'>
-            <strong><%= title_titelize(movie.title) %></strong>
-          </div>
+<% unless (movies_present?(@top, @latest, @featured)) %>
+  <div class='row'>
+    <div class='col-md-6 col-md-offset-3'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h1 align='center'>No Movies To Show</h1>
         </div>
-      <% end %>
-    </div>
-    <div class='pull-center'>
-      <%= link_to 'View All', movies_path(filter: 'Latest'), class: 'btn btn-success' %>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <h1>Featured:</h1>
-</div>
-
-<div>
-  <% @featured.in_groups_of(3, false).each do |movie_group| %>
-    <div class='row'>
-      <% movie_group.each do |movie| %>
-        <div class='col-md-4'>
-          <%= link_to image_tag(movie.first_poster(:medium)), movie %>
-          <div align='center'>
-            <strong><%= title_titelize(movie.title) %></strong>
-          </div>
+        <div class='panel-body'>
+          <p>No movies to show till now. Click new movie in top right corner to add new movies. Dont forget to sign to add new movies</p>
         </div>
-      <% end %>
+      </div>
     </div>
-    <div class='pull-center'>
-      <%= link_to 'View All', movies_path(filter: 'Featured'), class: 'btn btn-success' %>
-    </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
+<%= render 'movies/movie', movies: @top, movie_filter: 'Top' if @top.present? %>
+<%= render 'movies/movie', movies: @latest, movie_filter: 'Latest' if @latest.present? %>
+<%= render 'movies/movie', movies: @featured, movie_filter: 'Featured' if @featured.present? %>

@@ -11,12 +11,15 @@ class Movie < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
 
+
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   GENRE = ['Action', 'Thriller', 'Romance', 'Horror']
 
   scope :feature, -> { where(featured: true) }
-  scope :latest, -> { order('release_date DESC') }
+  scope :top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }
+  scope :sort, -> { order('release_date DESC') }
+  scope :approved, -> { where(approved: true) }
 
   def get_average_rating
     self.ratings.present? ? self.ratings.average(:score) : 0
@@ -33,4 +36,11 @@ class Movie < ActiveRecord::Base
   def first_poster(style=:medium)
     attachments.first && attachments.first.try(:image).url(style) || "#{style.to_s}/missing.png"
  end
+
+  def self.get_movies(filter)
+    return self.sort if filter == "Latest"
+    return self.top if filter == "Top"
+    return self.feature if filter == "Featured"
+  end
+
 end
