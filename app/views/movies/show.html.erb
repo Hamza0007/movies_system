@@ -59,6 +59,10 @@
           <%= raw @movie.description %>
         </div>
 
+        <%= link_to 'Add to Favourite', movie_favourite_movies_path(@movie), remote: true, class: 'btn btn-xs btn-primary', method: :post %>
+
+        <div id='favourite-message'></div>
+
         <div id='movies-review'>
           <%= render 'reviews/reviews' %>
 

@@ -11,7 +11,7 @@ class Movie < ActiveRecord::Base
   has_many :actors, through: :casts
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
-
+  has_many :favourite_movies, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 

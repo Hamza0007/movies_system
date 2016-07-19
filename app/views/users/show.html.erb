@@ -23,6 +23,22 @@
               <%= @user.encrypted_password %>
             </div>
 
+            <div class='newline'>
+              <h3>Favourite Movies:</h3>
+              <div>
+                <% @user.favourite_movies.in_groups_of(3, false).each do |movie_group| %>
+                  <div class='row'>
+                    <% movie_group.each do |favorite| %>
+                      <div class='col-md-3'>
+                        <%= link_to image_tag(favorite.movie.first_poster(:thumb)), favorite.movie %>
+                        <%= favorite.movie.title %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
             <%= link_to 'Back', root_url, class: 'btn btn-primary' %>
           </div>
         </div>

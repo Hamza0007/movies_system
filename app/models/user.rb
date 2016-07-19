@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :reported_reviews
   has_many :reviews
   has_many :ratings
+  has_many :favourite_movies, dependent: :destroy
+
   accepts_nested_attributes_for :attachment
 
   def profile_picture(style=:medium)

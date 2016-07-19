@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714060701) do
+ActiveRecord::Schema.define(version: 20160718040630) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 20160714060701) do
 
   add_index "casts", ["actor_id"], name: "index_casts_on_actor_id", using: :btree
   add_index "casts", ["movie_id"], name: "index_casts_on_movie_id", using: :btree
+
+  create_table "favourite_movies", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "movie_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "favourite_movies", ["movie_id"], name: "index_favourite_movies_on_movie_id", using: :btree
+  add_index "favourite_movies", ["user_id"], name: "index_favourite_movies_on_user_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title",        limit: 150
@@ -148,6 +158,8 @@ ActiveRecord::Schema.define(version: 20160714060701) do
 
   add_foreign_key "casts", "actors"
   add_foreign_key "casts", "movies"
+  add_foreign_key "favourite_movies", "movies"
+  add_foreign_key "favourite_movies", "users"
   add_foreign_key "ratings", "movies"
   add_foreign_key "ratings", "users"
   add_foreign_key "reported_reviews", "reviews"
