@@ -7,6 +7,7 @@
       <div class='col-md-9'>
         <ul class='nav navbar-nav pull-right'>
           <% if user_signed_in? %>
+            <li><%= render 'layouts/search' %></li>
             <li class='active'><a href='#'>Logged in as <strong><%= current_user.email %></strong>.</a></li>
             <li><%= link_to 'New Movie', new_movie_path %></li>
             <li><%= link_to 'View profile', user_path(current_user) %></li>

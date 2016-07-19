@@ -1,6 +1,8 @@
 class Movie < ActiveRecord::Base
   paginates_per 5
 
+  include ThinkingSphinx::Scopes
+
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :trailer, presence: true
   validates :genre, presence: true
@@ -16,6 +18,15 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   GENRE = ['Action', 'Thriller', 'Romance', 'Horror']
+
+  sphinx_scope(:latest) {
+    {order: 'release_date DESC'}
+  }
+
+  sphinx_scope(:acknowledged) {
+    { with: {approved: true} }
+  }
+
 
   scope :feature, -> { where(featured: true) }
   scope :top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }

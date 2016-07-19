@@ -6,8 +6,11 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.get_movies(params[:filter]).approved.sort
-
+    if params[:search]
+      @movies = Movie.search(params[:search]).acknowledged.latest
+    else
+      @movies = Movie.get_movies(params[:filter]).approved.sort
+    end
     @movies = @movies.page(params[:page])
   end
 

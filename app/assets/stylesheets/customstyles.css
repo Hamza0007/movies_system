@@ -2,7 +2,9 @@ body {
   background-color: #f0f0f0;
   overflow-x: hidden;
 }
-
+.search-bar {
+  margin-top: 5px;
+}
 .body-margin {
   margin-top: 150px;
   margin-bottom: 50px;
