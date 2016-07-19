@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :reported_reviews
   has_many :reviews
   has_many :ratings
-
   accepts_nested_attributes_for :attachment
+
+  def profile_picture(style=:medium)
+    attachment && attachment.try(:image).url(style) || "#{style.to_s}/missing.png"
+  end
+
 end
