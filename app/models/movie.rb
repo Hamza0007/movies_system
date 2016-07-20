@@ -55,4 +55,21 @@ class Movie < ActiveRecord::Base
     return self.feature if filter == "Featured"
   end
 
+  def self.default_search_conditions
+    {
+      conditions: {},
+      with: { approved: true },
+      order: 'release_date DESC',
+    }
+  end
+
+  def self.search_movies(params)
+    default_conditions = self.default_search_conditions
+    default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
+    default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
+    default_conditions[:with][:release_date] = (Date.parse(params[:start_date])..Date.parse(params[:end_date])) if (params[:start_date] && params[:end_date]).present?
+
+    self.search params[:search], default_conditions
+  end
+
 end

@@ -166,3 +166,7 @@ body {
 #movie-review {
   margin-top: 5px;
 }
+
+#advanced-search {
+  display: none;
+}

@@ -1,3 +1,51 @@
+
+<div id='advanced-search' >
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h1 class='text-center'>Search</h1>
+        </div>
+        <div class='panel-body'>
+          <%= form_tag movies_path, method: :get, class: 'form-inline' do %>
+            <div class='row'>
+              <div class='col-md-4'>
+                <strong>Title:</strong>
+                <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by movie name' %>
+              </div>
+              <div class='col-md-4'>
+                <strong>Genre:</strong>
+                <%= text_field_tag :genre, params[:genre], class:'form-control', placeholder: 'Search by genre' %>
+              </div>
+              <div class='col-md-4'>
+                <strong>Actors:</strong>
+                <%= text_field_tag :actors, params[:actors], class:'form-control', placeholder: 'Search by sctors' %>
+              </div>
+            </div>
+
+            <div class='newline'></div>
+
+            <div class='row newline'>
+              <div class='col-md-4 '>
+                <strong>Start Date:</strong>
+                <%= date_field_tag :start_date, params[:start_date], class:'form-control', placeholder: 'Search by start date' %>
+              </div>
+              <div class='col-md-4'>
+                <strong>Last Date:</strong>
+                <%= date_field_tag :end_date, params[:end_date], class:'form-control', placeholder: 'Search by end' %>
+              </div>
+            </div>
+
+            <div class='text-center'>
+              <%= submit_tag 'Search', class: 'btn btn-danger' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1 class='text-center'>Movies</h1>
 <div class='container'>
   <div class='container-fluid'>

@@ -12,4 +12,10 @@ $(document).on('ready page:load', function() {
     if (verified)
       e.preventDefault();
   });
+
+  $('#show_advanced-search').click(function(event){
+    event.preventDefault();
+    $('div#advanced-search').toggle();
+  });
+
 });

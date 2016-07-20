@@ -3,4 +3,8 @@
     <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search Movies Here' %>
   </div>
   <%= submit_tag 'Search', class: 'btn btn-default' %>
+  <div class='clearfix'></div>
+  <% if movie_index? %>
+    <%= link_to 'Advanced Search', '#', id: 'show_advanced-search' %>
+  <% end %>
 <% end %>
