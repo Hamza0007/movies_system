@@ -1,93 +1,83 @@
-<div class='container alignment'>
-  <h1 class='text-center'>
-    <%= title_titelize(@movie.title) %>
-  </h1>
-
-  <div class='container-fluid' id='movie-container' data-movie='<%= @movie.id %>' data-rating='<%= @rating.id if user_signed_in? %>'>
-    <div class='row movie-field-content'>
-      <div class='col-md-12'>
-
-        <div>
-          <span class='heading-font'>
-            <strong>Cast:</strong>
-          </span>
-          <span class='text-capitalize font-weight-normal'><%= @actors.collect(&:name).join(',') %></span>
-        </div>
-
-        <div>
-          <span class='heading-font'>
-            <strong>Genre:</strong>
-          </span>
-          <%= @movie.genre %>
-        </div>
-
-        <div>
-          <span class='heading-font'>
-            <strong>Duration:</strong>
-          </span>
-          <%= @movie.duration %>
-          <span> mins </span>
-        </div>
-
-        <div>
-          <span class='heading-font'>
-            <strong>Release Date:</strong>
-          </span>
-          <%= date_display(@movie.release_date) %>
-        </div>
-
-        <div class='newline'>
-          <%= image_tag @movie.first_poster(:medium) %>
-          <div class='clearfix'></div>
-          <%= render partial: 'poster', collection: @movie.attachments, as: :poster %>
-        </div>
-
-        <div class='newline poster-trailer-alignment'>
-          <span class='heading-font'>
-            <strong>Trailer:</strong>
-          </span>
-          <div class='clearfix'></div>
-          <%= raw @movie.trailer %>
-        </div>
-
-        <div id='description-alignment'>
-          <div class='clearfix'></div>
-            <span class='heading-font'>
-              <strong>Description:</strong>
-            </span>
-          <div class='clearfix'></div>
-          <%= raw @movie.description %>
-        </div>
-
-        <%= link_to 'Add to Favourite', movie_favourite_movies_path(@movie), remote: true, class: 'btn btn-xs btn-primary', method: :post %>
-
-        <div id='favourite-message'></div>
-
-        <div id='movies-review'>
-          <%= render 'reviews/reviews' %>
-
-          <% if user_signed_in? %>
-            <%= render partial: 'reviews/form' , locals: {form_type: true} %>
-
-            <div>
-              <h2>Add Rating:</h2>
-              <div class='star-rating' data-score='<%= @rating.score %>'></div>
-            </div>
-
-          <% end %>
-
-          <div>
-            <h2>Rating:</h2>
-            <div class='avg-star-rating' data-score='<%= @movie.get_average_rating %>'></div>
-          </div>
-        </div>
-
-        <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
-        <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %> |
-        <%= link_to 'Back', movies_path, class: 'btn btn-primary text-color' %>
-        <div class='clearfix margin-up-down'></div>
-        <div class='clearfix margin-up-down'></div>
+<div class='container-fluid' id='movie-container' data-movie='<%= @movie.id %>' data-rating='<%= @rating.id if user_signed_in? %>'>
+  <div class='row newline'>
+    <div class='col-md-5'>
+      <div class='newline'>
+        <%= image_tag @movie.first_poster(:medium), class: 'img-responsive' %>
+        <div class='clearfix'></div>
+        <%= render partial: 'poster', collection: @movie.attachments, as: :poster %>
       </div>
+      <div class='newline'>
+        <h2>Rating:</h2>
+        <span class='avg-star-rating' data-score='<%= @movie.get_average_rating %>'></span>
+      </div>
+
+      <% if user_signed_in? %>
+        <div>
+          <h2>Add Rating:</h2>
+          <div class='star-rating' data-score='<%= @rating.score %>'></div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class='col-md-7'>
+      <h1 class='pull-left'>
+        <%= title_titelize(@movie.title) %>
+      </h1>
+      <div class='clearfix'></div>
+
+      <div class='newline'>
+        <strong>Cast:</strong>
+        <span class='text-capitalize font-weight-normal'><%= @actors.collect(&:name).join(',') %></span>
+      </div>
+
+      <div class='newline'>
+        <strong>Genre:</strong>
+        <%= @movie.genre %>
+      </div>
+
+      <div class='newline'>
+        <strong>Release Date:</strong>
+        <%= date_display(@movie.release_date) %>
+      </div>
+
+      <div class='newline'>
+        <strong>Duration:</strong>
+        <%= @movie.duration %>
+        <span> mins </span>
+      </div>
+
+
+      <div class='newline'>
+        <%= link_to 'Add to Favourite', movie_favourite_movies_path(@movie), remote: true, class: 'btn btn-xs btn-primary', method: :post %>
+        <div id='favourite-message'></div>
+      </div>
+
+      <div class='newline'>
+        <strong>Trailer:</strong>
+        <div class='clearfix'></div>
+        <%= raw @movie.trailer %>
+      </div>
+
+      <div class='newline'>
+        <strong>Description:</strong>
+        <div class='clearfix'></div>
+        <%= raw @movie.description %>
+      </div>
+
+      <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
+      <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %> |
+      <%= link_to 'Back', movies_path, class: 'btn btn-primary text-color' %>
     </div>
   </div>
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <%= render 'reviews/reviews' %>
+      <% if user_signed_in? %>
+        <h2>Add a review:</h2>
+        <%= render partial: 'reviews/form' , locals: {form_type: true} %>
+      <% end %>
+    </div>
+  </div>
+
 </div>

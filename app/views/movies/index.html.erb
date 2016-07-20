@@ -4,14 +4,14 @@
     <% @movies.in_groups_of(3, false).each do |movie_group| %>
       <div class='row'>
         <% movie_group.each do |movie| %>
-          <div class='col-md-3 index-movie-alignment'>
-            <%= link_to image_tag(movie.first_poster(:medium)), movie %>
-            <div id='movie-title-alignment'>
+          <div class='col-md-4 col-sm-6 col-xs-12'>
+            <%= link_to image_tag(movie.first_poster(:medium), class: 'img-responsive'), movie %>
+            <div class='text-center'>
               <strong><%= title_titelize(movie.title) %></strong>
             </div>
           </div>
         <% end %>
-      </div>
+  </div>
     <% end %>
     <div class='text-center'>
       <%= paginate @movies %>

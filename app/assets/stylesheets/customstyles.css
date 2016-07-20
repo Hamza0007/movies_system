@@ -6,7 +6,7 @@ body {
   margin-top: 5px;
 }
 .body-margin {
-  margin-top: 150px;
+  margin-top: 100px;
   margin-bottom: 50px;
 }
 
@@ -120,9 +120,13 @@ body {
   margin-bottom: 20px;
 }
 
+.movie-content-padding {
+  margin-bottom: 20px;
+}
+
 .heading-font {
 
-  font-size: 20px;
+  font-size: 16px;
 }
 
 #footer-background {

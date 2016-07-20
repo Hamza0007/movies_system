@@ -1,88 +1,84 @@
-<div class='container alignment'>
-  <div class='container-fluid'>
-    <div class='row field-content'>
-      <div class='col-md-11-offset-1 inline-style'>
-        <div class='panel panel-default panel-alignment-edit'>
-          <div class='panel-heading'>
-            <h1 class='center'><%= button_title('Movie') %></h1>
-          </div>
-          <div class='panel-body panel-body-alignment'>
-            <%= nested_form_for(@movie) do |f| %>
-              <% if @movie.errors.any? %>
-                <div id='error_explanation'><p id='notice' class='alert alert-danger'><%= notice %></p>
-                  <h2><%= pluralize(@movie.errors.count, 'error') %> prohibited this movie from being saved:</h2>
+<div class='row'>
+  <div class='col-md-6 col-md-offset-3'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <h1 class='center'><%= button_title('Movie') %></h1>
+      </div>
+      <div class='panel-body'>
+        <%= nested_form_for(@movie) do |f| %>
+          <% if @movie.errors.any? %>
+            <div id='error_explanation'><p id='notice' class='alert alert-danger'><%= notice %></p>
+              <h2><%= pluralize(@movie.errors.count, 'error') %> prohibited this movie from being saved:</h2>
 
-                  <ul>
-                    <% @movie.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                    <% end %>
-                  </ul>
-                </div>
+              <ul>
+                <% @movie.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class='field form-group'>
+            <%= f.label :title %>
+            <div class='clearfix'></div>
+            <%= f.text_field :title, required: true, maxlength: 150, size: 20, class: 'form-control size-textbox' %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :trailer %><span> (Add Embeded Code)</span>
+            <div class='clearfix'></div>
+            <%= f.text_field :trailer, required: true, class: 'form-control size-textbox' %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :actors %>
+            <div class='clearfix'></div>
+            <%= f.select :actor_ids, options_for_select(@all_actors, @selected), {}, { multiple: true } %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :genre %>
+            <div class='clearfix'></div>
+            <%= f.select :genre, Movie::GENRE, class: 'form-control' %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :release_date, 'Release Date' %>
+            <div class='clearfix'></div>
+            <%= f.date_field :release_date, required: true, class: 'form-control size-textbox' %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :duration %><span> (in mins)</span>
+            <div class='clearfix'></div>
+            <%= f.text_field :duration, required: true, maxlength: 10, class: 'form-control size-textbox', id: 'numeric' %>
+          </div>
+
+          <div class='field form-group'>
+            <%= f.label :Posters %>
+            <div class='clearfix'></div>
+            <%= f.fields_for :attachments do |attachment| %>
+              <% unless attachment.object.image.url(:thumb) == 'thumb/missing.png' %>
+                <div><%= image_tag attachment.object.image.url(:thumb) %></div>
               <% end %>
 
-              <div class='field form-group'>
-                <%= f.label :title %>
-                <div class='clearfix'></div>
-                <%= f.text_field :title, required: true, maxlength: 150, size: 20, class: 'form-control size-textbox' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :trailer %><span> (Add Embeded Code)</span>
-                <div class='clearfix'></div>
-                <%= f.text_field :trailer, required: true, class: 'form-control size-textbox' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :actors %>
-                <div class='clearfix'></div>
-                <%= f.select :actor_ids, options_for_select(@all_actors, @selected), {}, { multiple: true } %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :genre %>
-                <div class='clearfix'></div>
-                <%= f.select :genre, Movie::GENRE, class: 'form-control' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :release_date, 'Release Date' %>
-                <div class='clearfix'></div>
-                <%= f.date_field :release_date, required: true, class: 'form-control size-textbox' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :duration %><span> (in mins)</span>
-                <div class='clearfix'></div>
-                <%= f.text_field :duration, required: true, class: 'form-control size-textbox', id: 'numeric' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :Posters %>
-                <div class='clearfix'></div>
-                <%= f.fields_for :attachments do |attachment| %>
-                  <% unless attachment.object.image.url(:thumb) == 'thumb/missing.png' %>
-                    <div><%= image_tag attachment.object.image.url(:thumb) %></div>
-                  <% end %>
-
-                  <%= attachment.file_field :image, class:'form-control' %>
-                  <%= attachment.link_to_remove 'Remove item', class: 'margin-up-down btn btn-danger' %>
-                  <div class='clearfix'></div>
-                <% end %>
-                <%= f.link_to_add 'Add attachments', :attachments, class: 'btn btn-primary' %>
-              </div>
-
-              <div class='field form-group'>
-                <%= f.label :description %>
-                <div class='clearfix'></div>
-                <%= f.cktext_area :description, rows: 10, class: 'form-control size-textbox' %>
-              </div>
-
-              <div class='actions form-group'>
-                <%= f.submit button_title('Movie'), class: 'btn btn-success' %>
-              </div>
+              <%= attachment.file_field :image, class:'form-control' %>
+              <%= attachment.link_to_remove 'Remove attachment', class: 'margin-up-down btn btn-danger' %>
+              <div class='clearfix'></div>
             <% end %>
+            <%= f.link_to_add 'Add attachments', :attachments, class: 'btn btn-primary' %>
           </div>
-        </div>
+
+          <div class='field form-group'>
+            <%= f.label :description %>
+            <div class='clearfix'></div>
+            <%= f.cktext_area :description, rows: 10, class: 'form-control' %>
+          </div>
+
+          <div class='actions form-group'>
+            <%= f.submit button_title('Movie'), class: 'btn btn-success' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
