@@ -67,9 +67,17 @@ class Movie < ActiveRecord::Base
     default_conditions = self.default_search_conditions
     default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
     default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
-    default_conditions[:with][:release_date] = (Date.parse(params[:start_date])..Date.parse(params[:end_date])) if (params[:start_date] && params[:end_date]).present?
+    default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
 
     self.search params[:search], default_conditions
+  end
+
+  def self.date_range(start_date, end_date)
+    if start_date.present? && end_date.present?
+      Date.parse(start_date)..Date.parse(end_date)
+    elsif start_date.present?
+      Date.parse(start_date)..Date.today
+    end
   end
 
 end

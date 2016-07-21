@@ -170,3 +170,7 @@ body {
 #advanced-search {
   display: none;
 }
+
+.search-link {
+  color: #ffffff;
+}
