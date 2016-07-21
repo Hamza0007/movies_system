@@ -3,6 +3,9 @@ class Movie < ActiveRecord::Base
 
   include ThinkingSphinx::Scopes
 
+  DEFAULT_SEARCH_FILTER = { approved: true }
+  DEFAULT_SEARCH_ORDER = 'release_date DESC'
+
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :trailer, presence: true
   validates :genre, presence: true
@@ -68,7 +71,6 @@ class Movie < ActiveRecord::Base
     default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
     default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
     default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
-
     self.search params[:search], default_conditions
   end
 
@@ -77,6 +79,29 @@ class Movie < ActiveRecord::Base
       Date.parse(start_date)..Date.parse(end_date)
     elsif start_date.present?
       Date.parse(start_date)..Date.today
+    end
+  end
+
+  def movie_hash
+    {
+      movie_details: self,
+      actors: self.actors.pluck(:id, :name, :biography, :gender),
+      reviews: self.reviews.pluck(:id, :user_id, :comment, :report_count)
+    }
+  end
+
+  def self.search_movie(params)
+    if params[:title] || params[:genre] || params[:actors] || params[:release_date]
+      conditions = {
+        title: params[:title],
+        genre: params[:genre],
+        actors: params[:actors],
+        release_date: params[:release_date]
+      }
+
+      Movie.search(conditions: conditions, with: DEFAULT_SEARCH_FILTER, order: DEFAULT_SEARCH_ORDER)
+    else
+      Movie.all
     end
   end
 

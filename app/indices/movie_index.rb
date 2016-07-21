@@ -7,6 +7,5 @@ ThinkingSphinx::Index.define :movie, with: :active_record do
 
   has release_date
   has approved
-  has featured
 
 end
