@@ -53,9 +53,9 @@ class Movie < ActiveRecord::Base
  end
 
   def self.get_movies(filter)
-    return self.sort if filter == "Latest"
-    return self.top if filter == "Top"
-    return self.feature if filter == "Featured"
+    return self.sort.approved if filter == "Latest"
+    return self.top.approved if filter == "Top"
+    return self.feature.approved if filter == "Featured"
   end
 
   def self.default_search_conditions
@@ -67,11 +67,15 @@ class Movie < ActiveRecord::Base
   end
 
   def self.search_movies(params)
-    default_conditions = self.default_search_conditions
-    default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
-    default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
-    default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
-    self.search params[:search], default_conditions
+    if(params[:filter])
+      get_movies(params[:filter])
+    else
+      default_conditions = self.default_search_conditions
+      default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
+      default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
+      default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
+      self.search params[:search], default_conditions
+    end
   end
 
   def self.date_range(start_date, end_date)
