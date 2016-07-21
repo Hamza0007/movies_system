@@ -30,11 +30,10 @@ class Movie < ActiveRecord::Base
     { with: {approved: true} }
   }
 
-
-  scope :feature, -> { where(featured: true) }
+  scope :feature, -> { where(featured: true).sort }
   scope :top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }
   scope :sort, -> { order('release_date DESC') }
-  scope :approved, -> { where(approved: true) }
+  scope :approved, -> { where(approved: true).sort }
 
   def get_average_rating
     self.ratings.present? ? self.ratings.average(:score) : 0

@@ -10,4 +10,8 @@ class Review < ActiveRecord::Base
     self.user.email
   end
 
+  def reported_by?(user)
+    self.reported_reviews.where(user: user).present?
+  end
+
 end

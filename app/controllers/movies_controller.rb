@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_all_actors, only: [:new, :create, :edit]
-
+  before_action :check_movie, only: [:show]
   # GET /movies
   # GET /movies.json
   def index
@@ -76,16 +76,22 @@ class MoviesController < ApplicationController
 
   private
 
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
+  def set_movie
+    @movie = Movie.find_by_id(params[:id])
+    redirect_to root_path, notice: 'Movie does not exists' unless @movie.present?
+  end
 
-    def set_all_actors
-      @all_actors = Actor.all.pluck(:name, :id)
-    end
+  def set_all_actors
+    @all_actors = Actor.all.pluck(:name, :id)
+  end
 
-    def movie_params
-      params.require(:movie).permit(:title, :description, :trailer, :featured, :genre, :release_date, :duration, :approved, actor_ids: [],
-       attachments_attributes: [:id, :image, :_destroy])
-    end
+  def movie_params
+    params.require(:movie).permit(:title, :description, :trailer, :featured, :genre, :release_date, :duration, :approved, actor_ids: [],
+     attachments_attributes: [:id, :image, :_destroy])
+  end
+
+  def check_movie
+    redirect_to root_path, notice: 'Movie is not approved' unless @movie.approved
+  end
+
 end

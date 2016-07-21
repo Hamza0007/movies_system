@@ -1,5 +1,1 @@
-<% if @report %>
-  alert('Review Reported')
-<% else %>
-  alert('Review Already Reported')
-<% end %>
+$('span#'+ "reviews-<%= @review.id %>").html("<div class='btn btn-xs btn-danger'>Reported</div>");

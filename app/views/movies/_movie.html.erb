@@ -5,6 +5,9 @@
       <%= link_to image_tag(movie.first_poster(:medium), class: 'img-responsive'), movie %>
       <div class='text-center'>
         <strong><%= title_titelize(movie.title) %></strong>
+        <% if movie_filter == 'Top' %>
+          <div class='avg-star-rating' data-score=<%= movie.get_average_rating %>></div>
+        <% end %>
       </div>
     </div>
   <% end %>
