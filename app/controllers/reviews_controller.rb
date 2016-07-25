@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_movie
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-  before_action :require_permission, only: :edit
+  before_action :set_movie
+  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :review_owner, only: [:edit, :destroy]
 
   def edit
   end
@@ -31,20 +31,18 @@ class ReviewsController < ApplicationController
   private
 
   def set_review
-    @review = Review.find(params[:id])
+    @review = Review.find_by_id(params[:id])
   end
 
   def set_movie
-    @movie = Movie.find(params[:movie_id])
+    @movie = Movie.find_by_id(params[:movie_id])
   end
 
   def review_params
     params.require(:review).permit(:user_id, :movie_id, :comment)
   end
 
-  def require_permission
-    unless current_user == @review.user
-      redirect_to root_path
-    end
+  def review_owner
+    redirect_to root_path unless current_user == @review.user
   end
 end
