@@ -1,11 +1,13 @@
 class Movie < ActiveRecord::Base
-  paginates_per 5
 
   include ThinkingSphinx::Scopes
 
   DEFAULT_SEARCH_FILTER = { approved: true }
   DEFAULT_SEARCH_ORDER = 'release_date DESC'
   SEARCH_PER_PAGE = 12
+  PER_PAGE = 5
+
+  paginates_per PER_PAGE
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :trailer, presence: true
