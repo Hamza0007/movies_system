@@ -6,10 +6,11 @@ class Movie < ActiveRecord::Base
   DEFAULT_SEARCH_FILTER = { approved: true }
   DEFAULT_SEARCH_ORDER = 'release_date DESC'
 
-  validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
+  validates :title, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :trailer, presence: true
   validates :genre, presence: true
   validates :release_date, presence: true
+  validates :description, length: { maximum: 150 }
 
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :casts, dependent: :destroy
