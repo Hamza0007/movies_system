@@ -1,8 +1,8 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :approved_movie, only: [:show]
   before_action :set_all_actors, only: [:new, :create, :edit]
-  before_action :check_movie, only: [:show]
 
   def index
     @movies = Movie.search_movies(params)
@@ -79,7 +79,7 @@ class MoviesController < ApplicationController
      attachments_attributes: [:id, :image, :_destroy])
   end
 
-  def check_movie
+  def approved_movie
     redirect_to root_path, notice: 'Movie is not approved' unless @movie.approved
   end
 
