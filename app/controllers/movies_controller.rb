@@ -3,15 +3,12 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_all_actors, only: [:new, :create, :edit]
   before_action :check_movie, only: [:show]
-  # GET /movies
-  # GET /movies.json
+
   def index
     @movies = Movie.search_movies(params)
     @movies = @movies.page(params[:page])
   end
 
-  # GET /movies/1
-  # GET /movies/1.json
   def show
     @actors = @movie.actors
     @review = Review.new
@@ -24,18 +21,14 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/new
   def new
     @movie = Movie.new
   end
 
-  # GET /movies/1/edit
   def edit
     @selected = @movie.actors.pluck(:id)
   end
 
-  # POST /movies
-  # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
 
@@ -50,8 +43,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /movies/1
-  # PATCH/PUT /movies/1.json
   def update
     respond_to do |format|
       if @movie.update(movie_params)
@@ -64,8 +55,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # DELETE /movies/1
-  # DELETE /movies/1.json
   def destroy
     @movie.destroy
     respond_to do |format|
