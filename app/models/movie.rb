@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
 
   DEFAULT_SEARCH_FILTER = { approved: true }
   DEFAULT_SEARCH_ORDER = 'release_date DESC'
+  SEARCH_PER_PAGE = 12
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :trailer, presence: true
@@ -58,11 +59,13 @@ class Movie < ActiveRecord::Base
     return self.feature.approved if filter == "Featured"
   end
 
-  def self.default_search_conditions
+  def self.default_search_conditions(page)
     {
       conditions: {},
       with: { approved: true },
       order: 'release_date DESC',
+      page: page,
+      per_page: SEARCH_PER_PAGE,
     }
   end
 
@@ -70,7 +73,7 @@ class Movie < ActiveRecord::Base
     if(params[:filter])
       get_movies(params[:filter])
     else
-      default_conditions = self.default_search_conditions
+      default_conditions = self.default_search_conditions(params[:page])
       default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
       default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
       default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
