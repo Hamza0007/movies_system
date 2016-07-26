@@ -1,6 +1,7 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: [:update, :destroy]
   before_action :set_movie, only: [:create, :update, :destroy]
+  before_action :set_rating, only: [:update, :destroy]
+
 
   def create
     @rating = @movie.ratings.new(rating_params)
@@ -38,15 +39,14 @@ class RatingsController < ApplicationController
 
   private
     def set_rating
-      @rating = Rating.find(params[:id])
+      @rating = Rating.find_by_id(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
       params.require(:rating).permit(:score)
     end
 
     def set_movie
-      @movie = Movie.find(params[:movie_id])
+      @movie = Movie.find_by_id(params[:movie_id])
     end
 end
