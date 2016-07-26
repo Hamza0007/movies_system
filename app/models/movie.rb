@@ -24,7 +24,7 @@ class Movie < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
-  GENRE = ['Action', 'Thriller', 'Romance', 'Horror']
+  GENRE = ['action', 'thriller', 'romance', 'horror']
 
   sphinx_scope(:latest) {
     {order: 'release_date DESC'}
