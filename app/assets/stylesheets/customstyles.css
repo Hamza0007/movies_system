@@ -174,3 +174,13 @@ body {
 .search-link {
   color: #ffffff;
 }
+
+.glyphicon-size {
+ font-size: 3.0em;
+ margin-top: 10px;
+ color: red;
+}
+
+.favourite-button {
+  margin-top: 25px;
+}
