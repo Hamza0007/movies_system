@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718040630) do
+ActiveRecord::Schema.define(version: 20160727050048) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160718040630) do
   create_table "actors", force: :cascade do |t|
     t.string   "name",       limit: 20,    null: false
     t.text     "biography",  limit: 65535
-    t.string   "gender",     limit: 10,    null: false
+    t.string   "gender",     limit: 6,     null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 20160718040630) do
   add_index "casts", ["movie_id"], name: "index_casts_on_movie_id", using: :btree
 
   create_table "favourite_movies", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "movie_id",   limit: 4
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "movie_id",   limit: 4, null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -88,21 +88,21 @@ ActiveRecord::Schema.define(version: 20160718040630) do
   add_index "favourite_movies", ["user_id"], name: "index_favourite_movies_on_user_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
-    t.string   "title",        limit: 150
+    t.string   "title",        limit: 30,                    null: false
     t.text     "description",  limit: 65535
-    t.string   "trailer",      limit: 255
+    t.string   "trailer",      limit: 255,                   null: false
     t.boolean  "featured",                   default: false
     t.boolean  "approved",                   default: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "genre",        limit: 255,                   null: false
-    t.date     "release_date"
+    t.date     "release_date",                               null: false
     t.integer  "duration",     limit: 4
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "movie_id",   limit: 4
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "movie_id",   limit: 4, null: false
     t.integer  "score",      limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 20160718040630) do
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "reported_reviews", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "review_id",  limit: 4
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "review_id",  limit: 4, null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20160718040630) do
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
     t.integer  "movie_id",     limit: 4
-    t.text     "comment",      limit: 65535
+    t.text     "comment",      limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "report_count", limit: 4,     default: 0
