@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :approved_movie, only: [:show]
   before_action :set_all_actors, only: [:new, :create, :edit]
+  before_action :check_date, only: [:index]
 
   def index
     @movies = Movie.search_movies(params)
@@ -81,6 +82,18 @@ class MoviesController < ApplicationController
 
   def approved_movie
     redirect_to root_path, notice: 'Movie is not approved' unless @movie.approved
+  end
+
+  def check_date
+    return if params[:start_date].blank? && params[:end_date].blank?
+    if params[:start_date].present? && params[:end_date].blank?
+      message = 'Please enter end date'
+    elsif params[:start_date].blank? && params[:end_date].present?
+      message = 'Please enter start date'
+    elsif params[:start_date] > params[:end_date]
+      message = 'Please enter valid start date and end date'
+    end
+      redirect_to movies_path, notice: message if message
   end
 
 end

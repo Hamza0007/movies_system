@@ -2,8 +2,6 @@ class Movie < ActiveRecord::Base
 
   include ThinkingSphinx::Scopes
 
-  DEFAULT_SEARCH_FILTER = { approved: true }
-  DEFAULT_SEARCH_ORDER = 'release_date DESC'
   SEARCH_PER_PAGE = 12
   PER_PAGE = 5
 
@@ -40,15 +38,11 @@ class Movie < ActiveRecord::Base
   scope :approved, -> { where(approved: true).sort }
 
   def get_average_rating
-    self.ratings.present? ? self.ratings.average(:score) : 0
+    ratings.present? ? ratings.average(:score) : 0
   end
 
   def get_movie_ratings(user)
-    user.ratings.for_movie(self).first || self.ratings.new
-  end
-
-  def movie_cast
-    self.actors.pluck(:name).join(', ')
+    user.ratings.for_movie(self).first || ratings.new
   end
 
   def first_poster(style=:medium)
@@ -56,9 +50,10 @@ class Movie < ActiveRecord::Base
  end
 
   def self.get_movies(filter)
-    return self.sort.approved if filter == "Latest"
-    return self.top.approved if filter == "Top"
-    return self.feature.approved if filter == "Featured"
+    movie = self.includes(:attachments)
+    return movie.sort.approved if filter == 'Latest'
+    return movie.top.approved if filter == 'Top'
+    return movie.feature.approved if filter == 'Featured'
   end
 
   def self.default_search_conditions(page)
@@ -78,7 +73,7 @@ class Movie < ActiveRecord::Base
       default_conditions = self.default_search_conditions(params[:page])
       default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
       default_conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
-      default_conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date]) if params[:start_date].present?
+      default_conditions[:with][:release_date] = (Date.parse(params[:start_date])..Date.parse(params[:end_date])) if (params[:start_date].present? && params[:end_date]).present?
       self.search params[:search], default_conditions
     end
   end
@@ -88,29 +83,6 @@ class Movie < ActiveRecord::Base
       Date.parse(start_date)..Date.parse(end_date)
     elsif start_date.present?
       Date.parse(start_date)..Date.today
-    end
-  end
-
-  def movie_hash
-    {
-      movie_details: self,
-      actors: self.actors.pluck(:id, :name, :biography, :gender),
-      reviews: self.reviews.pluck(:id, :user_id, :comment, :report_count)
-    }
-  end
-
-  def self.search_movie(params)
-    if params[:title] || params[:genre] || params[:actors] || params[:release_date]
-      conditions = {
-        title: params[:title],
-        genre: params[:genre],
-        actors: params[:actors],
-        release_date: params[:release_date]
-      }
-
-      Movie.search(conditions: conditions, with: DEFAULT_SEARCH_FILTER, order: DEFAULT_SEARCH_ORDER)
-    else
-      Movie.all
     end
   end
 

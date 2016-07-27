@@ -5,7 +5,7 @@ ActiveAdmin.register Movie do
   index do
     column :title
     column :actors do |movie|
-      movie.movie_cast
+      movie_cast(movie)
     end
     column 'Description' do |movie|
       movie.description.html_safe
@@ -34,7 +34,7 @@ ActiveAdmin.register Movie do
       end
       row :title
       row :actors do |movie|
-        movie.movie_cast
+        movie_cast(movie)
       end
       row :trailer
       row :genre

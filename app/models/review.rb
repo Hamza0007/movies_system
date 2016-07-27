@@ -13,7 +13,7 @@ class Review < ActiveRecord::Base
   end
 
   def reported_by?(user)
-    self.reported_reviews.where(user: user).present?
+    reported_reviews.where(user: user).present?
   end
 
   def self.create_reported_review(user, review)

@@ -24,9 +24,11 @@
           <%= link_to 'Destroy', [@movie, review], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
         <% else %>
           <% if review.reported_by?(current_user) %>
-            <div class='btn btn-xs btn-danger'>Reported</div>
+            <div class='btn btn-xs btn-danger' disabled>Reported</div>
           <% else %>
-            <span id="reviews-<%= review.id %>"><%= link_to 'Report',[@movie, review, ReportedReview.new], class: 'btn btn-xs btn-primary', remote: true, method: :post %></span>
+            <span id="reviews-<%= review.id %>">
+              <%= link_to 'Report', [@movie, review, ReportedReview.new], class: 'btn btn-xs btn-primary', remote: true, method: :post %>
+            </span>
           <% end %>
         <% end %>
       <% end %>
