@@ -7,14 +7,10 @@
         <div class='clearfix'></div>
         <%= render partial: 'poster', collection: @movie.attachments, as: :poster %>
       </div>
-      <div class='newline'>
-        <h2>Rating:</h2>
-        <span class='avg-star-rating' data-score='<%= @movie.get_average_rating %>'></span>
-      </div>
 
       <% if user_signed_in? %>
         <div>
-          <h2>Add Rating:</h2>
+          <h3>Rate Me!</h3>
           <div class='star-rating' data-score='<%= @rating.score %>'></div>
         </div>
       <% end %>
@@ -22,18 +18,19 @@
 
     <div class='col-md-7'>
       <div class='row'>
-        <div class='col-md-8'>
+        <div class='col-md-7'>
           <h1 class='pull-left'>
             <%= title_titelize(@movie.title) %>
           </h1>
         </div>
 
-        <div class='col-md-4'>
+        <div class='col-md-5'>
           <% if @movie.favourite_movies.already_added_to_favourites?(current_user,@movie) %>
             <div class='glyphicon glyphicon-heart glyphicon-size'></div>
           <% else %>
             <div class='favourite-button'>
               <%= link_to 'Add to Favourite', movie_favourite_movies_path(@movie), class: 'btn btn-xs btn-primary', method: :post %>
+              <span class='avg-star-rating pull-right' data-score='<%= @movie.get_average_rating %>'></span>
             </div>
           <% end %>
         </div>
@@ -63,7 +60,6 @@
       </div>
 
       <div class='newline'>
-        <strong>Trailer:</strong>
         <div class='clearfix'></div>
         <%= raw @movie.trailer %>
       </div>
@@ -74,8 +70,8 @@
         <%= raw @movie.description %>
       </div>
 
-      <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %> |
-      <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %> |
+      <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %>
+      <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %>
       <%= link_to 'Back', movies_path, class: 'btn btn-primary text-color' %>
     </div>
   </div>
