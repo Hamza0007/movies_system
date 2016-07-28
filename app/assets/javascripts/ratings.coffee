@@ -2,16 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'ready page:load', ->
-  $('.rating').raty
-    path: '/assets'
-    readOnly: true
-    score: ->
-      $(this).attr 'data-score'
-
-  $('.rating-form').raty
-    path: '/assets'
-    scoreName: 'rate[rating]'
+$(document).on 'ready page:change', ->
 
   $('.avg-star-rating').raty
     path: '/assets/'
@@ -34,7 +25,7 @@ $(document).on 'ready page:load', ->
             score: score
           dataType: 'json'
           success: (data) ->
-            $('.avg-star-rating').raty 'set', score: data.average
+            $('.avg-star-rating').raty 'set', score: data.rating.score
       else
         $.ajax
           type: 'PATCH'
