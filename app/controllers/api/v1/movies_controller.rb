@@ -9,7 +9,7 @@ module Api
       DEFAULT_SEARCH_ORDER = 'release_date DESC'
 
       def index
-        respond_with search_movie(params)
+        respond_with search_movie(params).page(params[:page])
       end
 
       def show
@@ -31,10 +31,16 @@ module Api
       end
 
       def movie_hash(movie)
+        movie_attachments = []
+        movie.attachments.each do |attachment|
+          movie_attachments << attachment.image.url
+        end
         {
           movie_details: movie,
           actors: movie.actors.pluck(:id, :name, :biography, :gender),
-          reviews: movie.reviews.pluck(:id, :user_id, :comment, :report_count)
+          reviews: movie.reviews.pluck(:id, :user_id, :comment, :report_count),
+          posters: movie.attachments.pluck(:id, :image_file_name, :image_content_type, :image_file_size),
+          path: movie_attachments,
         }
       end
 
