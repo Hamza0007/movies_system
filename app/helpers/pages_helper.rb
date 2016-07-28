@@ -1,5 +1,5 @@
 module PagesHelper
   def movies_present?(top,latest,featured)
-    return (top.present? && latest.present? && featured.present?)
+    return (top.blank? && latest.blank? && featured.blank?)
   end
 end
