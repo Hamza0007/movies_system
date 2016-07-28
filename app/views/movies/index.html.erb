@@ -15,7 +15,7 @@
               </div>
               <div class='col-md-4'>
                 <strong>Genre:</strong>
-                <%= text_field_tag :genre, params[:genre], class:'form-control', placeholder: 'Search by genre' %>
+                <%= select_tag :genre, options_for_select(Movie::GENRE), class:'form-control', prompt: 'Select a genre' %>
               </div>
               <div class='col-md-4'>
                 <strong>Actors:</strong>
