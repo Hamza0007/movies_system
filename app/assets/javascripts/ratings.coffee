@@ -25,7 +25,7 @@ $(document).on 'ready page:change', ->
             score: score
           dataType: 'json'
           success: (data) ->
-            $('.avg-star-rating').raty 'set', score: data.rating.score
+            $('.avg-star-rating').raty 'set', score: data.average
       else
         $.ajax
           type: 'PATCH'
