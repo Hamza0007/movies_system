@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727130652) do
+ActiveRecord::Schema.define(version: 20160728074032) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20160727130652) do
     t.string   "genre",        limit: 255,                   null: false
     t.date     "release_date",                               null: false
     t.integer  "duration",     limit: 4
+    t.boolean  "delta",                      default: true,  null: false
   end
 
   create_table "ratings", force: :cascade do |t|
