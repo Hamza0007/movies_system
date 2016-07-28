@@ -18,4 +18,17 @@ $(document).on('ready page:load', function() {
     $('div#advanced-search').toggle();
   });
 
+  $('#trailer-iframe').focusout(function(){
+    var value = $(this).val();
+    if (value.indexOf('script') > -1)
+    {
+      alert('Enter iframe code only');
+      return;
+    }
+    if(!(value.indexOf('iframe') > -1))
+    {
+       alert('Enter iframe code');
+    }
+  });
+
 });
