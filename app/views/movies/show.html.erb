@@ -27,6 +27,7 @@
         <div class='col-md-5'>
           <% if @movie.favourite_movies.already_added_to_favourites?(current_user,@movie) %>
             <div class='glyphicon glyphicon-heart glyphicon-size'></div>
+            <span class='avg-star-rating pull-right m-20' data-score='<%= @movie.get_average_rating %>'></span>
           <% else %>
             <div class='favourite-button'>
               <%= link_to 'Add to Favourite', movie_favourite_movies_path(@movie), class: 'btn btn-xs btn-primary', method: :post %>
@@ -71,8 +72,8 @@
       </div>
 
       <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-success' %>
-      <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger text-color' %>
-      <%= link_to 'Back', movies_path, class: 'btn btn-primary text-color' %>
+      <%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <%= link_to 'Back', movies_path, class: 'btn btn-primary' %>
     </div>
   </div>
 
