@@ -7,11 +7,11 @@ class Movie < ActiveRecord::Base
 
   paginates_per PER_PAGE
 
-  validates :title, presence: true, uniqueness: true, length: { maximum: 30 }
+  validates :title, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :trailer, presence: true
   validates :genre, presence: true
   validates :release_date, presence: true
-  validates :description, length: { maximum: 150 }
+  validates :description, length: { maximum: 350 }
 
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :casts, dependent: :destroy
