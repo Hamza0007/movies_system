@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
   include ThinkingSphinx::Scopes
 
   SEARCH_PER_PAGE = 12
-  PER_PAGE = 5
+  PER_PAGE = 6
 
   paginates_per PER_PAGE
 
