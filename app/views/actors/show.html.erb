@@ -1,0 +1,44 @@
+<% title @actor.name %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <h1 class='text-center'><%= @actor.name %></h1>
+      </div>
+      <div class='panel-body'>
+        <div class='row'>
+          <div class='col-md-5'>
+            <%= image_tag @actor.first_poster(:medium), class: 'img-responsive' %>
+            <div class='newline'></div>
+          </div>
+          <div class='col-md-7'>
+            <div class='newline'>
+              <span>
+                <strong>Name:</strong>
+              </span>
+              <%= @actor.name %>
+            </div>
+            <div class='newline'>
+              <span>
+                <strong>Gender:</strong>
+              </span>
+              <%= @actor.gender %>
+            </div>
+            <div class='newline'>
+              <span>
+                <strong>Biography:</strong>
+              </span>
+              <%= @actor.biography %>
+            </div>
+            <%= link_to 'Back', root_url, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/carousel', images: @actor.attachments unless @actor.attachments.empty? %>
+    <div class='newline'></div>
+  </div>
+</div>
+
+<%= render 'movie' %>
+<%= render 'shared/modal' %>

@@ -184,6 +184,20 @@ body {
 .favourite-button {
   margin-top: 30px;
 }
+
 .m-20 {
   margin-top: 20px;
 }
+
+.carousel-inner > .item > img {
+  margin: auto;
+}
+
+.imagepreview {
+  width: 100%;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }

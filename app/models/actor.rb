@@ -4,4 +4,11 @@ class Actor < ActiveRecord::Base
 
   has_many :casts, dependent: :destroy
   has_many :movies, through: :casts
+  has_many :attachments, as: :attachable, dependent: :destroy
+
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+
+  def first_poster(style=:medium)
+    attachments.first && attachments.first.try(:image).url(style) || "#{style.to_s}/missing.png"
+  end
 end
