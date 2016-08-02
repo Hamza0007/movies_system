@@ -33,7 +33,7 @@ class Movie < ActiveRecord::Base
   }
 
   scope :feature, -> { where(featured: true).sort }
-  scope :top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }
+  scope :top, -> { joins('LEFT OUTER JOIN ratings ON movies.id = ratings.movie_id').group('movies.id').order('AVG(ratings.score) DESC') }
   scope :sort, -> { order('release_date DESC') }
   scope :approved, -> { where(approved: true).sort }
   scope :without_sort, -> { order('release_date ASC') }
@@ -56,6 +56,7 @@ class Movie < ActiveRecord::Base
     return movie.sort.approved if filter == 'Latest'
     return movie.top.approved if filter == 'Top'
     return movie.feature.approved if filter == 'Featured'
+    return movie.sort.approved
   end
 
   def self.get_movies_sort_type(param)
