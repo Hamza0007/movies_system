@@ -36,6 +36,8 @@ class Movie < ActiveRecord::Base
   scope :top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }
   scope :sort, -> { order('release_date DESC') }
   scope :approved, -> { where(approved: true).sort }
+  scope :without_sort, -> { order('release_date ASC') }
+  scope :without_top, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) ASC') }
 
   def get_average_rating
     ratings.present? ? ratings.average(:score) : 0
@@ -56,6 +58,20 @@ class Movie < ActiveRecord::Base
     return movie.feature.approved if filter == 'Featured'
   end
 
+  def self.get_movies_sort_type(param)
+    if param == 'rating_descending'
+      top.approved
+    elsif param == 'rating_ascending'
+      without_top.approved
+    elsif param == 'release_date_ascending'
+      without_sort.approved
+    elsif param == 'release_date_descending'
+      approved
+    else
+      all.approved
+    end
+  end
+
   def self.default_search_conditions(page)
     {
       conditions: {},
@@ -67,8 +83,10 @@ class Movie < ActiveRecord::Base
   end
 
   def self.search_movies(params)
-    if(params[:filter])
+    if(params[:filter]).present?
       get_movies(params[:filter])
+    elsif (params[:sort]).present?
+      get_movies_sort_type(params[:sort])
     else
       default_conditions = self.default_search_conditions(params[:page])
       default_conditions[:conditions][:genre] = params[:genre] if params[:genre].present?

@@ -1,0 +1,17 @@
+<div class='dropdown btn btn-info pull-left'>
+  <%= link_to 'Sort', class: 'dropdown-toggle' %>
+  <ul class='dropdown-menu'>
+    <li>
+      <%= link_to 'Sort Ascending on Rating', movies_path(sort: 'rating_ascending') %>
+    </li>
+    <li>
+      <%= link_to 'Sort Descending on Rating', movies_path(sort: 'rating_descending') %>
+    </li>
+    <li>
+      <%= link_to 'Sort Ascending on Release Date', movies_path(sort: 'release_date_ascending') %>
+    </li>
+    <li>
+      <%= link_to 'Sort Descending on Release Date', movies_path(sort: 'release_date_descending') %>
+    </li>
+  </ul>
+</div>
