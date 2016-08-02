@@ -1,11 +1,11 @@
 <% title @movie.title %>
 <div class='container-fluid' id='movie-container' data-movie='<%= @movie.id %>' data-rating='<%= @rating.id if user_signed_in? %>'>
   <div class='row newline'>
-    <div class='col-md-5'>
+    <div class='col-md-6'>
       <div class='newline'>
         <%= image_tag @movie.first_poster(:medium), class: 'img-responsive' %>
-        <div class='clearfix'></div>
-        <%= render partial: 'poster', collection: @movie.attachments, as: :poster %>
+        <div class='newline'></div>
+        <%= render 'shared/carousel', images: @movie.attachments unless @movie.attachments.empty? %>
       </div>
 
       <% if user_signed_in? %>
@@ -16,7 +16,7 @@
       <% end %>
     </div>
 
-    <div class='col-md-7'>
+    <div class='col-md-6'>
       <div class='row'>
         <div class='col-md-7'>
           <h1 class='pull-left'>
@@ -41,7 +41,8 @@
 
       <div class='newline'>
         <strong>Cast:</strong>
-        <span class='text-capitalize font-weight-normal'><%= @actors.collect(&:name).join(',') %></span>
+        <span class='text-capitalize font-weight-normal'>
+        <%= raw @movie.actors.collect { |actor| link_to actor.name, actor }.join(",") %>
       </div>
 
       <div class='newline'>
@@ -87,3 +88,4 @@
     </div>
   </div>
 </div>
+<%= render 'shared/modal' %>
